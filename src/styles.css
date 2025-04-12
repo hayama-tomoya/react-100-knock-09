@@ -1,0 +1,31 @@
+.weatherForecast {
+  border: solid 1px lightgray;
+  border-radius: 8px;
+}
+
+.cardContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.title {
+  background-color: rgb(239, 106, 128);
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  text-align: center;
+  padding: 15px;
+  color: #fff;
+  margin: 0;
+}
+
+.weatherCard {
+  margin: 10px 0px ;
+  padding: 2px 30px;
+  width: fit-content;
+  background-color: rgb(244, 235, 235);
+  border-radius: 8px;
+  text-align: center;
+}
