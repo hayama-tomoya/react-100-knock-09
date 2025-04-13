@@ -1,31 +1,71 @@
-.weatherForecast {
-  border: solid 1px lightgray;
-  border-radius: 8px;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.cardContainer {
+.memoApp {
   display: flex;
+}
+
+.addMemo {
+  background-color: rgb(165, 83, 42);
+  width: 25%;
+  height: 100vh;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.addMemoHeader {
+  display: flex;
+  /* justify-content: space-between; */
   justify-content: center;
   align-items: center;
-  gap: 15px;
-  flex-wrap: wrap;
+  width: 100%;      
+  gap: 56px;
+  margin-bottom: 24px; 
 }
 
-.title {
-  background-color: rgb(239, 106, 128);
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
-  text-align: center;
-  padding: 15px;
-  color: #fff;
-  margin: 0;
+.addMemoHeader p{
+  font-weight: bold;
+  font-size: x-large;
+  color: white;
 }
 
-.weatherCard {
-  margin: 10px 0px ;
-  padding: 2px 30px;
-  width: fit-content;
-  background-color: rgb(244, 235, 235);
-  border-radius: 8px;
-  text-align: center;
+.addMemoHeader button {
+  padding: 4px 8px;
+}
+
+.addMemoList {
+  width: 100%;             
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.addMemoList button{
+  padding: 4px 16px;
+  margin: 4px auto;
+}
+
+.memoContent {
+  width: 75%;
+  height: 100vh;
+}
+
+.memoHeader {
+  background-color: rgba(237, 174, 111, 0.866);
+  padding: 8px;
+  height: 10%;
+  display: flex;
+  align-items: center;
+  /* justify-content: center; */
+}
+
+.memoText {
+  background-color: bisque;
+  padding: 8px;
+  height: 90%;
 }
