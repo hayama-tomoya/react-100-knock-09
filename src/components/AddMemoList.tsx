@@ -11,15 +11,18 @@ export const AddMemoList = ({ memos, onSelectedMemo, onDeleteMemo }: AddMemoList
   return (
     <div className="addMemoList">
       {memos.map((memo) => (
-        <div className="memoItem">
-          <button key={memo.id} onClick={() => onSelectedMemo(memo.id)}>
+        <div key={memo.id} className="memoItem">
+          <button onClick={() => onSelectedMemo(memo.id)}>
             {memo.text}
-            <button
-              onClick={() => onDeleteMemo(memo.id)}
+            <span
+              onClick={(e) => {
+                e.stopPropagation();
+                onDeleteMemo(memo.id);
+              }}
               className="deleteButton"
             >
               🗑️
-            </button>
+            </span>
           </button>
         </div>
       ))}

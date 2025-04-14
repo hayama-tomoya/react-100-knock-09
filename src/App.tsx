@@ -37,25 +37,48 @@ export const App = () => {
     }
   };
 
-  const handleChangeHeaderStyle = (
+  const handleChangeContentStyle = (
     id: number,
-    newStyle: Partial<Memo['headerStyle']>
+    newStyle: Partial<Memo['contentStyle']>
   ) => {
     setMemos((prevMemos) =>
       prevMemos.map((memo) =>
         memo.id === id
-          ? { ...memo, headerStyle: { ...memo.headerStyle, ...newStyle } }
+          ? { ...memo, contentStyle: { ...memo.contentStyle, ...newStyle } }
           : memo
       )
     );
   };
+
+  const handleTextSelection = (id: number) => {
+    const selection = window.getSelection();
+    if (!selection || selection.isCollapsed) return; 
+
+    const selectedText = selection.toString();
+    const style = memos.find((memo) => memo.id === id)?.contentStyle;
+
+    if (selectedText && style) {
+      const newContent = applyStyleToSelectedText(selectedText, style);
+      handleEditMemo(id, newContent);
+    }
+  };
+
+  const applyStyleToSelectedText = (
+    selectedText: string,
+    style: Memo['contentStyle']
+  ) => {
+    const styledText = `<span style="font-weight:${style.fontWeight}; font-size:${style.fontSize}; text-align:${style.textAlign};">${selectedText}</span>`;
+    return styledText;
+  };
+
+  
 
   const onAddMemo = () => {
     const newMemo: Memo = {
       id: memos.length,
       text: `MEMO${memos.length + 1}`,
       content: '',
-      headerStyle: {
+      contentStyle: {
         fontWeight: 'normal',
         fontSize: '16px',
         textAlign: 'left',
@@ -74,7 +97,8 @@ export const App = () => {
       onEditMemo={handleEditMemo}
       onEditMemoTitle={handleEditMemoTitle}
       onDeleteMemo={handleDeleteMemo}
-      onChangeHeaderStyle={handleChangeHeaderStyle}
+      onChangeContentStyle={handleChangeContentStyle}
+      onTextSelection={handleTextSelection}
       />
     </div>
 
