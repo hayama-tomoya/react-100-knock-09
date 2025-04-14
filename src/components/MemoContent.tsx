@@ -6,10 +6,11 @@ type MemoContentProps = {
   onEditMemo: (id: number, newContent: string) => void;
   onEditMemoTitle: (id: number, newText: string) => void;
   // onEditMemoContent: (id: number, newContent: string) => void;
-  onChangeHeaderStyle: (id: number, newStyle: Partial<Memo['headerStyle']>) => void;
+  onChangeContentStyle: (id: number, newStyle: Partial<Memo['contentStyle']>) => void;
+  onTextSelection: (id: number) => void;
 };
 
-export const MemoContent = ({ memo, onEditMemo, onEditMemoTitle, onChangeHeaderStyle }: MemoContentProps) => {
+export const MemoContent = ({ memo, onEditMemo, onEditMemoTitle, onChangeContentStyle, onTextSelection}: MemoContentProps) => {
   if (!memo) {
     return (
       <div className="memoContentUndifined">
@@ -23,7 +24,17 @@ export const MemoContent = ({ memo, onEditMemo, onEditMemoTitle, onChangeHeaderS
   }
 
   const handleFontSizeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    onChangeHeaderStyle(memo.id, { fontSize: e.target.value });
+    onChangeContentStyle(memo.id, { fontSize: e.target.value });
+  };
+
+  const handleFontWeightChange = () => {
+    onChangeContentStyle(memo.id, {
+      fontWeight: memo.contentStyle.fontWeight === 'bold' ? 'normal' : 'bold',
+    });
+  };
+
+  const handleTextAlignChange = (align: 'left' | 'center' | 'right') => {
+    onChangeContentStyle(memo.id, { textAlign: align });
   };
 
   const fontSizeOptions = [];
@@ -35,6 +46,13 @@ export const MemoContent = ({ memo, onEditMemo, onEditMemoTitle, onChangeHeaderS
     );
   }
 
+  const handleTextSelect = (e: React.MouseEvent) => {
+    if (e.button === 0) {
+      onTextSelection(memo.id); 
+    }
+  };
+
+
   return (
     <div className="memoContent">
       <input
@@ -42,33 +60,32 @@ export const MemoContent = ({ memo, onEditMemo, onEditMemoTitle, onChangeHeaderS
         value={memo.text}
         onChange={(e) => onEditMemoTitle(memo.id, e.target.value)}
       />
-      <div 
-      className="memoHeader"
-      style={{
-        fontWeight: memo.headerStyle.fontWeight,
-        fontSize: memo.headerStyle.fontSize,
-        textAlign: memo.headerStyle.textAlign,
-      }}
-      >
+      <div className="memoHeader">
         <div className="memoHeaderControls">
-          <button onClick={() => onChangeHeaderStyle(memo.id, { fontWeight: memo.headerStyle.fontWeight === 'bold' ? 'normal' : 'bold' })}>
+          <button onClick={handleFontWeightChange} style={{ fontWeight: memo.contentStyle.fontWeight === 'bold' ? 'bold' : 'normal' }}>
             B
           </button>
-          <button onClick={() => onChangeHeaderStyle(memo.id, { textAlign: 'left' })}>⬅️</button>
-          <button onClick={() => onChangeHeaderStyle(memo.id, { textAlign: 'center' })}>↔️</button>
-          <button onClick={() => onChangeHeaderStyle(memo.id, { textAlign: 'right' })}>➡️</button>
+          <button onClick={() => handleTextAlignChange('left')}>⬅️</button>
+          <button onClick={() => handleTextAlignChange('center')}>↔️</button>
+          <button onClick={() => handleTextAlignChange('right')}>➡️</button>
           <select
-          value={memo.headerStyle.fontSize}
-          onChange={handleFontSizeChange}
-        >
-          {fontSizeOptions}
-        </select>
+            value={memo.contentStyle.fontSize}
+            onChange={handleFontSizeChange}
+          >
+            {fontSizeOptions}
+          </select>
         </div>
       </div>
       <textarea
         value={memo.content}
         onChange={onChangeText}
         className="memoText"
+        style={{
+          fontWeight: memo.contentStyle.fontWeight,
+          fontSize: memo.contentStyle.fontSize,
+          textAlign: memo.contentStyle.textAlign,
+        }}
+        onMouseUp={handleTextSelect}
       />
     </div>
   );

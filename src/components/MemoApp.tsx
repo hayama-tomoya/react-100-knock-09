@@ -10,11 +10,11 @@ type MemoAppProps = {
   onEditMemo: (id: number, newContent: string) => void;
   onEditMemoTitle: (id: number, newText: string) => void;
   onDeleteMemo: (id: number) => void;
-  onChangeHeaderStyle: (id: number, newStyle: Partial<Memo['headerStyle']>) => void;
-
+  onChangeContentStyle: (id: number, newStyle: Partial<Memo['contentStyle']>) => void;
+  onTextSelection: (id: number) => void;
 }
 
-export const MemoApp = ({ memos, selectedMemoId, onSelectedMemo, onAddMemo, onEditMemo, onEditMemoTitle, onDeleteMemo,  onChangeHeaderStyle }: MemoAppProps) => {
+export const MemoApp = ({ memos, selectedMemoId, onSelectedMemo, onAddMemo, onEditMemo, onEditMemoTitle, onDeleteMemo,  onChangeContentStyle ,onTextSelection }: MemoAppProps) => {
   return (
     <div className="memoApp">
       <AddMemo 
@@ -27,7 +27,8 @@ export const MemoApp = ({ memos, selectedMemoId, onSelectedMemo, onAddMemo, onEd
        memo={memos.find((memo) => memo.id === selectedMemoId)} 
        onEditMemo={onEditMemo}
        onEditMemoTitle={onEditMemoTitle}
-       onChangeHeaderStyle={onChangeHeaderStyle}
+       onChangeContentStyle={onChangeContentStyle}
+       onTextSelection={onTextSelection}
        />
     </div>
   );
