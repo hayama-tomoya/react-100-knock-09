@@ -5,22 +5,20 @@ import { AddMemoList } from "./AddMemoList"
 import { Memo } from "../type";
 
 
-export const AddMemo = (  ) => {
+type AddMemoProps = {
+  memos: Memo[];
+  onAddMemo: () => void;
+  onSelectedMemo: (id: number) => void;
+  onDeleteMemo: (id: number) => void;
+};
 
-  const [memos, setMemos] = useState<Memo[]>([]);
 
-  const onAddMemo = () => {
-    const newMemo: Memo = {
-      id: memos.length,
-      text: `MEMO${memos.length + 1}`,
-    };
-    setMemos([...memos, newMemo]);
-  }
+export const AddMemo = ( { memos, onSelectedMemo, onAddMemo, onDeleteMemo }: AddMemoProps ) => {
 
   return (
     <div className="addMemo">
-      <AddMemoHeader onClickAddMemo={onAddMemo} />
-      <AddMemoList memos={memos} />
+      <AddMemoHeader onAddMemo={onAddMemo} />
+      <AddMemoList memos={memos} onSelectedMemo={onSelectedMemo} onDeleteMemo={onDeleteMemo} />
     </div>
   );
 };

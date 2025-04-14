@@ -1,13 +1,13 @@
-type Props = {
-  onClickAddMemo: () => void;
+type AddMemoHeaderProps = {
+  onAddMemo: () => void;
 };
 
 
-export const AddMemoHeader = ({onClickAddMemo}: Props) => {
+export const AddMemoHeader = ({onAddMemo}: AddMemoHeaderProps) => {
   return (
     <div className="addMemoHeader">
       <p>メモアプリ</p>
-      <button onClick={onClickAddMemo}>+</button>
+      <button onClick={onAddMemo}>+</button>
     </div>
   );
 };

@@ -9,7 +9,7 @@
 }
 
 .addMemo {
-  background-color: rgb(165, 83, 42);
+  background-color: rgb(206, 115, 69);
   width: 25%;
   height: 100vh;
   padding: 16px;
@@ -35,19 +35,39 @@
 }
 
 .addMemoHeader button {
-  padding: 4px 8px;
+  padding: 0px 8px;
+  font-weight: bold;
+  font-size: 24px;
 }
 
-.addMemoList {
-  width: 100%;             
+.memoItem {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
+.addMemoList {
+  width: 100%;             
+}
+
 .addMemoList button{
-  padding: 4px 16px;
+  padding: 4px 8px 4px 16px;
   margin: 4px auto;
+  font-weight: bold;
+  font-size: large;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.deleteButton {
+  background: none;
+  border: none;
+  /* font-size: 14px; */
+  cursor: pointer;
+  padding: 0px;
+  margin: 0px;
+  font-size: x-small;
 }
 
 .memoContent {
@@ -55,17 +75,47 @@
   height: 100vh;
 }
 
-.memoHeader {
-  background-color: rgba(237, 174, 111, 0.866);
+.memoContentUndifined {
+  margin: 0px;
+  background-color: bisque;
+  width: 75%;
+  padding: 16px;
+  font-size: large;
+  font-weight: bold;
+}
+
+.memoTitle {
+  background-color: rgba(234, 137, 40, 0.866);
+  border: none;
   padding: 8px;
+  width: 100%;
   height: 10%;
   display: flex;
   align-items: center;
   /* justify-content: center; */
+  font-weight: bold;
+  font-size: xx-large;
 }
+
+.memoHeader{
+  background-color: rgba(229, 184, 139, 0.866);
+  height: 5%;
+  display: flex;
+  align-items: center;
+  padding: 0px 8px;
+}
+
+.memoHeaderControls {
+  display: flex;
+  gap: 8px; 
+  flex-wrap: wrap; 
+}
+
 
 .memoText {
   background-color: bisque;
+  border: none;
   padding: 8px;
-  height: 90%;
+  height: 85%;
+  width: 100%;
 }
