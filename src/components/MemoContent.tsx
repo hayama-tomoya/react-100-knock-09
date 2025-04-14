@@ -22,6 +22,19 @@ export const MemoContent = ({ memo, onEditMemo, onEditMemoTitle, onChangeHeaderS
     onEditMemo(memo.id, e.target.value);
   }
 
+  const handleFontSizeChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    onChangeHeaderStyle(memo.id, { fontSize: e.target.value });
+  };
+
+  const fontSizeOptions = [];
+  for (let i = 8; i <= 40; i += 8) {
+    fontSizeOptions.push(
+      <option key={i} value={`${i}px`}>
+        {i}px
+      </option>
+    );
+  }
+
   return (
     <div className="memoContent">
       <input
@@ -39,19 +52,17 @@ export const MemoContent = ({ memo, onEditMemo, onEditMemoTitle, onChangeHeaderS
       >
         <div className="memoHeaderControls">
           <button onClick={() => onChangeHeaderStyle(memo.id, { fontWeight: memo.headerStyle.fontWeight === 'bold' ? 'normal' : 'bold' })}>
-            Bold
+            B
           </button>
-          <button onClick={() => onChangeHeaderStyle(memo.id, { textAlign: 'left' })}>左</button>
-          <button onClick={() => onChangeHeaderStyle(memo.id, { textAlign: 'center' })}>中</button>
-          <button onClick={() => onChangeHeaderStyle(memo.id, { textAlign: 'right' })}>右</button>
+          <button onClick={() => onChangeHeaderStyle(memo.id, { textAlign: 'left' })}>⬅️</button>
+          <button onClick={() => onChangeHeaderStyle(memo.id, { textAlign: 'center' })}>↔️</button>
+          <button onClick={() => onChangeHeaderStyle(memo.id, { textAlign: 'right' })}>➡️</button>
           <select
-            value={memo.headerStyle.fontSize}
-            onChange={(e) => onChangeHeaderStyle(memo.id, { fontSize: e.target.value })}
-          >
-            <option value="16px">小</option>
-            <option value="24px">中</option>
-            <option value="32px">大</option>
-          </select>
+          value={memo.headerStyle.fontSize}
+          onChange={handleFontSizeChange}
+        >
+          {fontSizeOptions}
+        </select>
         </div>
       </div>
       <textarea
